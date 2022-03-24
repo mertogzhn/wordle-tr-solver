@@ -24,7 +24,7 @@ def cozum():
         donus=input(f"{i} harfi geri dönüsü: ")
         if donus=="*":
             with open("Dogru-Yerde-Harfler.txt","a",encoding="utf-8") as f:
-                f.write(f"{i}\n")
+                f.write(f"{i},{str(sira)}\n")
                 f.close()
         elif donus=="+":
             with open("Olan-Harfler.txt","a",encoding="utf-8") as f:
@@ -55,7 +55,9 @@ def cozum():
         for i in range(len(sozluk)):
             fh.write(sozluk[i])
 
-    yanlisYerler()
+    #yanlisYerler()
+
+    dogruYerler()
 
 def besHarfliler():            
     with open("besharfHafiza.txt","r",encoding="utf-8") as f:
@@ -72,6 +74,26 @@ def yanlisYerler():
         silinecekler=[]
         for j in sozluk:
             if yerler[i][0]==j[i]:
+                silinecekler.append(sozluk.index(j))
+        if silinecekler!=[]:
+            silinecekler.reverse()
+        #print(silinecekler)
+            for j in silinecekler:
+                sozluk.pop(j)
+    
+    with open("besharfHafiza.txt","w",encoding="utf-8") as fh:
+        for i in range(len(sozluk)):
+            fh.write(sozluk[i])
+
+def dogruYerler():
+    with open("Dogru-Yerde-Harfler.txt","r",encoding="utf-8") as f:
+        yerler=f.readlines()
+
+    sozluk=besHarfliler()
+    for i in range(len(yerler)):
+        silinecekler=[]
+        for j in sozluk:
+            if yerler[i][0]!=j[i]:
                 silinecekler.append(sozluk.index(j))
         if silinecekler!=[]:
             silinecekler.reverse()

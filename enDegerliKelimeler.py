@@ -21,15 +21,24 @@ def degerli():
     #print(puanListesi)
 
     enDeğerliler=[]
+    if len(puanListesi)>=10:
+        for i in range(10):
+            degerli=[]
+            degerli.append(kelimeler[puanListesi.index(max(puanListesi))])
+            degerli.append(puanListesi.index(max(puanListesi)))
 
-    for i in range(10):
-        degerli=[]
-        degerli.append(kelimeler[puanListesi.index(max(puanListesi))])
-        degerli.append(puanListesi.index(max(puanListesi)))
+            enDeğerliler.append(degerli)
+            kelimeler.pop(puanListesi.index(max(puanListesi)))
+            puanListesi.pop(puanListesi.index(max(puanListesi)))
+    else:
+        for i in range(len(puanListesi)):
+            degerli=[]
+            degerli.append(kelimeler[puanListesi.index(max(puanListesi))])
+            degerli.append(puanListesi.index(max(puanListesi)))
 
-        enDeğerliler.append(degerli)
-        kelimeler.pop(puanListesi.index(max(puanListesi)))
-        puanListesi.pop(puanListesi.index(max(puanListesi)))
+            enDeğerliler.append(degerli)
+            kelimeler.pop(puanListesi.index(max(puanListesi)))
+            puanListesi.pop(puanListesi.index(max(puanListesi)))
 
     print(enDeğerliler)
 
