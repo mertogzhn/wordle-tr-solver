@@ -30,7 +30,13 @@ def cozum():
     with open("Yanlis-Harfler.txt","r",encoding="utf-8") as f:
         icerik=f.readlines()
 
-    print(icerik)
+    print(icerik[0])
+
+def besHarfliler():            
+    with open("besharf.txt","r",encoding="utf-8") as f:
+        kelimeler = f.readlines()
+        f.close()
+    return kelimeler
 
       
 start()
