@@ -1,6 +1,6 @@
 #dosya açılır ve kelimeler listesitene atanır
 def degerli():
-    with open("besharf.txt","r",encoding="utf-8") as f:
+    with open("besharfHafiza.txt","r",encoding="utf-8") as f:
         kelimeler = f.readlines()
         f.close()
 
@@ -32,3 +32,5 @@ def degerli():
         puanListesi.pop(puanListesi.index(max(puanListesi)))
 
     print(enDeğerliler)
+
+degerli()
