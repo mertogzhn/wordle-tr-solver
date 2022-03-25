@@ -20,9 +20,13 @@ def cozum():
     girdi=input("girdiniz ne oldu: ")
     print("Doğru yerdekiler için *\nYanlış yerdekiler için +\nOlmayanlar için -")
     sira=0
+    yildiz=0
     for i in girdi:
         donus=input(f"{i} harfi geri dönüsü: ")
         if donus=="*":
+            yildiz+=1
+            if yildiz==5:
+                print("Görüşünüşe bakılırsak cevabı bulduk. Birdahaki sefere bensiz dene :) :)")
             with open("Dogru-Yerde-Harfler.txt","a",encoding="utf-8") as f:
                 f.write(f"{i},{str(sira)}\n")
                 f.close()
@@ -36,9 +40,23 @@ def cozum():
                 f.close()
         sira+=1
     sira=0
+
+    yanlisHarfler()
+
+    yanlisYerler()
+
+    dogruYerler()
+
+
+def besHarfliler():            
+    with open("besharfHafiza.txt","r",encoding="utf-8") as f:
+        kelimeler = f.readlines()
+        f.close()
+    return kelimeler    
+
+def yanlisHarfler():
     with open("Yanlis-Harfler.txt","r",encoding="utf-8") as f:
         icerik=f.readlines()
-
 
     sozluk=besHarfliler()
     for i in range(len(icerik)):
@@ -50,20 +68,15 @@ def cozum():
         #print(silinecekler)
         for j in silinecekler:
             sozluk.pop(j)
-
+                    
+    silinecekler=[]
     with open("besharfHafiza.txt","w",encoding="utf-8") as fh:
         for i in range(len(sozluk)):
             fh.write(sozluk[i])
 
-    #yanlisYerler()
-
-    dogruYerler()
-
-def besHarfliler():            
-    with open("besharfHafiza.txt","r",encoding="utf-8") as f:
-        kelimeler = f.readlines()
+    with open("Yanlis-Harfler.txt","w",encoding="utf-8") as f:
         f.close()
-    return kelimeler
+
 
 def yanlisYerler():
     with open("Olan-Harfler.txt","r",encoding="utf-8") as f:
@@ -73,17 +86,21 @@ def yanlisYerler():
     for i in range(len(yerler)):
         silinecekler=[]
         for j in sozluk:
-            if yerler[i][0]==j[i]:
+            basamak=int(yerler[i][2])
+            if yerler[i][0]==j[basamak]:
                 silinecekler.append(sozluk.index(j))
         if silinecekler!=[]:
             silinecekler.reverse()
         #print(silinecekler)
             for j in silinecekler:
                 sozluk.pop(j)
-    
+    silinecekler=[]
     with open("besharfHafiza.txt","w",encoding="utf-8") as fh:
         for i in range(len(sozluk)):
             fh.write(sozluk[i])
+
+    with open("Olan-Harfler.txt","w",encoding="utf-8") as f:
+        f.close() 
 
 def dogruYerler():
     with open("Dogru-Yerde-Harfler.txt","r",encoding="utf-8") as f:
@@ -92,15 +109,16 @@ def dogruYerler():
     sozluk=besHarfliler()
     for i in range(len(yerler)):
         silinecekler=[]
+        basamak=int(yerler[i][2])
         for j in sozluk:
-            if yerler[i][0]!=j[i]:
+            if yerler[i][0]!=j[basamak]:
                 silinecekler.append(sozluk.index(j))
         if silinecekler!=[]:
             silinecekler.reverse()
         #print(silinecekler)
             for j in silinecekler:
                 sozluk.pop(j)
-    
+    silinecekler=[]
     with open("besharfHafiza.txt","w",encoding="utf-8") as fh:
         for i in range(len(sozluk)):
             fh.write(sozluk[i])
